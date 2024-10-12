@@ -17,7 +17,7 @@ body {
 header {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 100px 100px 150px;
+    grid-template-rows: 75px 75px 90px;
     grid-template-areas: 
     "pl sl"
     "pl sl"
@@ -31,6 +31,8 @@ header {
 
 #logo {
     gap: 20px;
+    grid-column: pl;
+    grid-row: pl;
 }
 
 #sponsor > img {
@@ -208,10 +210,12 @@ footer {
 
     #brand {
         grid-area: title1;
+        font-size: 70px;
     }
 
     #slogan { 
         grid-area: title2;
+        font-size: 35px;
     }
 }
 
