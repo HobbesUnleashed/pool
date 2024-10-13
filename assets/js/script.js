@@ -9,13 +9,21 @@ let countdown;
 // Flag to check if the timer is running
 let isRunning = false;
 // Flag to check if the add time button has been used
-let yellowExtUsed = false;
+var yellowExtUsed = false;
 // Flag to check if the add time button has been used
-let redExtUsed = false;
+var redExtUsed = false;
 // Flag to check if dark mode already active
 let dark = false;
 
-function startPause() {
+function startPause(reset = false) {
+    if (reset) {
+        clearInterval(countdown);
+        timeLeft = 45;  // Resetting timeLeft to 45 seconds
+        timer.innerHTML = timeLeft;
+        startPauseBtn.innerHTML = "Start";
+        isRunning = false;
+        return;
+    }
     if (!isRunning) {
         countdown = setInterval(function() {
             timer.innerHTML = timeLeft;
@@ -33,84 +41,40 @@ function startPause() {
         startPauseBtn.innerHTML = "Pause";
     } else {
         clearInterval(countdown);
-        startPauseBtn.innerHTML = "Start"
+        startPauseBtn.innerHTML = "Resume"
     }
 
     isRunning = !isRunning;
 }
 
 
-// function addTime(buttonPressed) {
-//     if(buttonPressed == "red") {
-//         this.timeLeft += 15;
-//         this.timer.innerHTML = timeLeft;
-//         this.redExtUsed =true;
-//         console.log(this.redExtUsed);
-//     } else {
-//         this.timeLeft += 15;
-//         this.timer.innerHTML = timeLeft;
-//         this.yellowExtUsed = true;
-//         console.log(this.yellowExtUsed);
-//     }
-//     document.getElementById('red').disabled = true;
-//     document.getElementById('yellow').disabled = true;
-// }
+function addTime(buttonPressed) {
+    if(buttonPressed == "red") {
+        timeLeft += 15;
+        timer.innerHTML = timeLeft;
+        this.redExtUsed =true
+        console.log(this.redExtUsed);
+    } else {
+        timeLeft += 15;
+        timer.innerHTML = timeLeft;
+        this.yellowExtUsed = true;
+        console.log(this.yellowExtUsed);
+    }
+    document.getElementById('ared').disabled = true;
+    document.getElementById('ayellow').disabled = true;
+}
 
-// function showDisabled() {
-//     if(this.redExtUsed) {
-//         console.log('red');
-//         document.getElementById("yellow").disabled = false;
-//     } else if (this.yellowExtUsed) {
-//         console.log("yellow");
-//     }
-// }
+function showDisabled() {
+    if(this.redExtUsed) {
+        console.log('red');
+        document.getElementById("ayellow").disabled = false;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    } else if (this.yellowExtUsed) {
+        console.log("yellow");
+        document.getElementById("ared").disabled = false;
+    }
+    startPause();
+}
 
 
 // Add an event listener for the color mode
